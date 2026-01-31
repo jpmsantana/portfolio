@@ -8,7 +8,10 @@ This is a Next.js 16 portfolio application using:
 - **Next.js 16.1.6** with App Router
 - **React 19**
 - **TypeScript 5** with strict mode enabled
-- **Tailwind CSS v4** (with PostCSS)
+- **Tailwind CSS v4** (with PostCSS, `tw-animate-css` for animations)
+- **shadcn/ui** components (button, card, badge, separator) with Radix UI primitives
+- **Lucide React** for icons
+- **class-variance-authority** + **clsx** + **tailwind-merge** for className utilities (`lib/utils.ts`)
 - **Geist** font family (sans and mono variants)
 
 ## Development Commands
@@ -33,7 +36,7 @@ npm run lint
 This project uses Next.js App Router (not Pages Router). All routes are defined in the `app/` directory:
 - `app/layout.tsx` - Root layout with font configuration and metadata
 - `app/page.tsx` - Home page component
-- `app/globals.css` - Global styles with Tailwind v4 imports and CSS variables
+- `app/globals.css` - Global styles with Tailwind v4 imports, CSS variables, and shadcn/ui theme tokens
 
 ### Styling System
 - **Tailwind CSS v4** imported directly in `globals.css` using `@import "tailwindcss"`
@@ -63,6 +66,22 @@ Fonts are loaded using `next/font/google` in the root layout and applied via CSS
 const geistSans = Geist({ variable: "--font-geist-sans", subsets: ["latin"] });
 ```
 Applied to body via className with the variable property.
+
+### Component Structure
+- `components/` - Page section components (single-page layout):
+  - `Navigation.tsx` - Top navigation bar
+  - `Hero.tsx` - Hero/landing section
+  - `About.tsx` - About me section
+  - `Projects.tsx` - Project showcase using card components
+  - `Contact.tsx` - Contact information section
+- `components/ui/` - shadcn/ui primitives (button, card, badge, separator)
+- `lib/utils.ts` - `cn()` helper for merging Tailwind classes
+
+### shadcn/ui
+Configured via `components.json`. UI components live in `components/ui/` and use the `cn()` utility from `lib/utils.ts`. To add new components:
+```bash
+npx shadcn@latest add <component-name>
+```
 
 ### Image Optimization
 Static assets are in `public/` and loaded using Next.js `Image` component with proper width/height for optimization.
