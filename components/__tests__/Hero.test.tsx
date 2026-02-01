@@ -8,8 +8,19 @@ describe("Hero", () => {
     expect(screen.getByText("Vickings Software")).toBeInTheDocument();
   });
 
-  it("renders the Get in Touch link", () => {
+  it("renders the subtitle text", () => {
     render(<Hero />);
-    expect(screen.getAllByText("Get in Touch").length).toBeGreaterThan(0);
+    expect(
+      screen.getAllByText(
+        "Building modern web applications and AI-powered solutions."
+      ).length
+    ).toBeGreaterThanOrEqual(1);
+  });
+
+  it("renders CTA linking to #contact", () => {
+    const { container } = render(<Hero />);
+    const cta = container.querySelector('a[href="#contact"]');
+    expect(cta).toBeInTheDocument();
+    expect(cta?.textContent).toContain("Get in Touch");
   });
 });

@@ -12,4 +12,11 @@ describe("Projects", () => {
     render(<Projects />);
     expect(screen.getAllByText("Coming Soon").length).toBeGreaterThan(0);
   });
+
+  it("renders description text for coming soon card", () => {
+    render(<Projects />);
+    expect(
+      screen.getAllByText("Project showcases will be added here shortly.").length
+    ).toBeGreaterThanOrEqual(1);
+  });
 });
