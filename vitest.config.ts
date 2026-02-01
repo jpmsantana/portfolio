@@ -7,6 +7,25 @@ export default defineConfig({
   test: {
     environment: "jsdom",
     setupFiles: ["./vitest.setup.ts"],
+    coverage: {
+      provider: "v8",
+      reporter: ["text", "lcov"],
+      exclude: [
+        "components/ui/**",
+        ".next/**",
+        "out/**",
+        "build/**",
+        "*.config.*",
+        "vitest.setup.ts",
+        "next-env.d.ts",
+      ],
+      thresholds: {
+        statements: 80,
+        branches: 80,
+        functions: 80,
+        lines: 80,
+      },
+    },
   },
   resolve: {
     alias: {
